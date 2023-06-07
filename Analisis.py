@@ -31,39 +31,31 @@ if __name__ == "__main__":
     dt_train_pca = pca.fit_transform(X_train)
     dt_test_pca = pca.transform(X_test)
     
+    # Aplicar Kernel PCA
+    kernel_pca = KernelPCA(n_components=3, kernel='rbf')
+    dt_train_kernel_pca = kernel_pca.fit_transform(X_train)
+    dt_test_kernel_pca = kernel_pca.transform(X_test)
+    
+    # Aplicar Incremental PCA
+    incremental_pca = IncrementalPCA(n_components=3, batch_size=10)
+    dt_train_incremental_pca = incremental_pca.fit_transform(X_train)
+    dt_test_incremental_pca = incremental_pca.transform(X_test)
+    
     # Aplicar la regresión logística a los datos de PCA
     logistic_pca = LogisticRegression(solver='lbfgs', max_iter=1000)
     logistic_pca.fit(dt_train_pca, y_train)
     score_pca = logistic_pca.score(dt_test_pca, y_test)
-    
-    # Imprimir el resultado de PCA
     print("SCORE PCA: ", score_pca)
     
-    # Aplicar Kernel PCA
-    kernels = ['linear', 'poly', 'rbf']
-    for kernel in kernels:
-        kpca = KernelPCA(n_components=3, kernel=kernel)
-        dt_train_kpca = kpca.fit_transform(X_train)
-        dt_test_kpca = kpca.transform(X_test)
-        
-        # Aplicar la regresión logística a los datos de Kernel PCA
-        logistic_kpca = LogisticRegression(solver='lbfgs', max_iter=1000)
-        logistic_kpca.fit(dt_train_kpca, y_train)
-        score_kpca = logistic_kpca.score(dt_test_kpca, y_test)
-        
-        # Imprimir los resultados de Kernel PCA
-        print("SCORE KPCA", kernel, ": ", score_kpca)
-    
-    # Aplicar Incremental PCA
-    ipca = IncrementalPCA(n_components=3, batch_size=10)
-    dt_train_ipca = ipca.fit_transform(X_train)
-    dt_test_ipca = ipca.transform(X_test)
+    # Aplicar la regresión logística a los datos de Kernel PCA
+    logistic_kernel_pca = LogisticRegression(solver='lbfgs', max_iter=1000)
+    logistic_kernel_pca.fit(dt_train_kernel_pca, y_train)
+    score_kernel_pca = logistic_kernel_pca.score(dt_test_kernel_pca, y_test)
+    print("SCORE Kernel PCA: ", score_kernel_pca)
     
     # Aplicar la regresión logística a los datos de Incremental PCA
-    logistic_ipca = LogisticRegression(solver='lbfgs', max_iter=1000)
-    logistic_ipca.fit(dt_train_ipca, y_train)
-    score_ipca = logistic_ipca.score(dt_test_ipca, y_test)
-    
-    # Imprimir el resultado de Incremental PCA
-    print("SCORE Incremental PCA: ", score_ipca)
+    logistic_incremental_pca = LogisticRegression(solver='lbfgs', max_iter=1000)
+    logistic_incremental_pca.fit(dt_train_incremental_pca, y_train)
+    score_incremental_pca = logistic_incremental_pca.score(dt_test_incremental_pca, y_test)
+    print("SCORE Incremental PCA: ", score_incremental_pca)
 

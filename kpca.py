@@ -31,14 +31,6 @@ if __name__ == "__main__":
     dt_train_pca = pca.fit_transform(X_train)
     dt_test_pca = pca.transform(X_test)
     
-    # Aplicar la regresión logística a los datos de PCA
-    logistic_pca = LogisticRegression(solver='lbfgs', max_iter=1000)
-    logistic_pca.fit(dt_train_pca, y_train)
-    score_pca = logistic_pca.score(dt_test_pca, y_test)
-    
-    # Imprimir el resultado de PCA
-    print("SCORE PCA: ", score_pca)
-    
     # Aplicar Kernel PCA
     kernels = ['linear', 'poly', 'rbf']
     for kernel in kernels:
@@ -51,7 +43,7 @@ if __name__ == "__main__":
         logistic_kpca.fit(dt_train_kpca, y_train)
         score_kpca = logistic_kpca.score(dt_test_kpca, y_test)
         
-        # Imprimir los resultados de Kernel PCA
+        # Imprimir los resultados
         print("SCORE KPCA", kernel, ": ", score_kpca)
     
     # Aplicar Incremental PCA
@@ -64,6 +56,6 @@ if __name__ == "__main__":
     logistic_ipca.fit(dt_train_ipca, y_train)
     score_ipca = logistic_ipca.score(dt_test_ipca, y_test)
     
-    # Imprimir el resultado de Incremental PCA
-    print("SCORE Incremental PCA: ", score_ipca)
+    # Imprimir los resultados
+    print("SCORE IPCA: ", score_ipca)
 
