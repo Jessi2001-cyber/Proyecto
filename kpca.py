@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 
 if __name__ == "__main__":
     # Cargar los datos del dataframe de pandas
-    dt_heart = pd.read_csv('./data/Datos_Agosto_Diciembre.csv')
+    dt_heart = pd.read_csv('./data/base de datos.csv')
     
     # Imprimir un encabezado con los primeros 5 registros
     print(dt_heart.head(5))

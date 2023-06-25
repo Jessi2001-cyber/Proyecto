@@ -1,0 +1,1 @@
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\proyecto - copia\spwa-77677-firebase-adminsdk-gzs9n-0e599c2dba.json"
